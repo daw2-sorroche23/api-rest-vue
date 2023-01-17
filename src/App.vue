@@ -9,7 +9,29 @@
 </template>
 
 <script>
-  export default {
-    name: 'app',
+export default {
+  name: 'app',
+  data() {
+    return {
+      usuarios: [],
+    }
+  },
+    methods: {
+      getUsuarios() {
+        // Método para obtener la lista de usuarios
+      },
+      postUsuario() {
+        // Método para crear un usuario
+      },
+      putUsuario() {
+        // Método para actualizar un usuario
+      },
+      deleteUsuario() {
+        // Método para borrar un usuario
+      },
+    },
+    mounted() {
+      this.getUsuarios();
+    }
   }
 </script>
