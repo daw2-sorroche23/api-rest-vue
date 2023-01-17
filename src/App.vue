@@ -39,7 +39,17 @@ export default {
           }
         },
       putUsuario() {
-        // Método para actualizar un usuario
+        try {
+          const response = await fetch(`https://jsonplaceholder.typicode.com/users/${usuario.id}`, {
+          method: 'PUT',
+          body: JSON.stringify(usuario),
+          headers: { 'Content-type': 'application/json; charset=UTF-8' },
+          });
+          const usuarioActualizado = await response.json();
+          this.usuarios = this.usuarios.map(u => (u.id === usuario.id ? usuarioActualizado : u));
+        } catch (error) {
+          console.error(error);
+        }
       },
       deleteUsuario() {
         // Método para borrar un usuario
