@@ -18,11 +18,26 @@ export default {
   },
     methods: {
       getUsuarios() {
-        // Método para obtener la lista de usuarios
+        try {
+          const response = await fetch('https://jsonplaceholder.typicode.com/users');
+          this.usuarios = await response.json();
+        } catch (error) {
+          console.error(error);
+        }
       },
       postUsuario() {
-        // Método para crear un usuario
-      },
+          try {
+            const response = await fetch('https://jsonplaceholder.typicode.com/users', {
+            method: 'POST',
+            body: JSON.stringify(usuarios),
+            headers: { 'Content-type': 'application/json; charset=UTF-8' },
+            });
+            const usuarioCreado = await response.json();
+            this.usuarios = [...this.usuarios, usuarioCreado];
+          } catch (error) {
+          console.error(error);
+          }
+        },
       putUsuario() {
         // Método para actualizar un usuario
       },
