@@ -5,10 +5,17 @@
         <h1>Usuarios</h1>
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-12">
+        <tabla-usuarios :usuarios="usuarios" @eliminar-usuario="deleteUsuario" @actualizar-usuario="putUsuario" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import TablaUsuarios from './components/TablaUsuarios.vue';
+
 export default {
   name: 'app',
   data() {
@@ -16,8 +23,11 @@ export default {
       usuarios: [],
     }
   },
+  components:{
+    TablaUsuarios,
+  },
     methods: {
-      getUsuarios() {
+      async getUsuarios(usuario) {
         try {
           const response = await fetch('https://jsonplaceholder.typicode.com/users');
           this.usuarios = await response.json();
@@ -25,7 +35,7 @@ export default {
           console.error(error);
         }
       },
-      postUsuario() {
+      async postUsuario(usuario) {
           try {
             const response = await fetch('https://jsonplaceholder.typicode.com/users', {
             method: 'POST',
@@ -38,7 +48,7 @@ export default {
           console.error(error);
           }
         },
-      putUsuario() {
+      async putUsuario(usuario) {
         try {
           const response = await fetch(`https://jsonplaceholder.typicode.com/users/${usuario.id}`, {
           method: 'PUT',
@@ -51,7 +61,7 @@ export default {
           console.error(error);
         }
       },
-      deleteUsuario() {
+      async deleteUsuario(usuario) {
         try {
           await fetch(`https://jsonplaceholder.typicode.com/usuarios/${usuario.id}`, {
           method: "DELETE"
