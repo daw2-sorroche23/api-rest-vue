@@ -52,7 +52,14 @@ export default {
         }
       },
       deleteUsuario() {
-        // Método para borrar un usuario
+        try {
+          await fetch(`https://jsonplaceholder.typicode.com/usuarios/${usuario.id}`, {
+          method: "DELETE"
+          }); 
+          this.usuarios= this.usuarios.filter(u => u.id !== usuario.id);
+        } catch (error) {
+          console.error(error);
+        }
       },
     },
     mounted() {
